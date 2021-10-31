@@ -5,9 +5,9 @@ import '../App.css'
 const Loader = () => {
     return (
         <Container>
-            <Grid container alignItems={"center"} justify={"center"}>
+            <Grid container style={{height: 500}} alignItems={"center"} justifyContent={"center"}>
                 <Grid>
-                    <div class="lds-ripple"><div></div><div></div></div>
+                    <div className="lds-ripple"><div></div><div></div></div>
                 </Grid>
             </Grid>
         </Container>
