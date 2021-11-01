@@ -1,4 +1,4 @@
-import React, {useState, useContext} from 'react'
+import React, {useState, useContext, useEffect} from 'react'
 import { Container, TextField, Button, Grid, Avatar } from '@material-ui/core'
 import SendRounded from '@material-ui/icons/SendRounded';
 import { Context } from '../index'
@@ -28,6 +28,18 @@ const Chat = () => {
         setValue('')
     }
 
+        useEffect(() => {
+            const listener = event => {
+              if (event.code === "Enter") {
+                sendMessage()
+              }
+            };
+            document.addEventListener("keydown", listener);
+            return () => {
+              document.removeEventListener("keydown", listener);
+            };
+        }, [sendMessage]);
+
     if (loading) {
         return <Loader />
     }
@@ -46,8 +58,8 @@ const Chat = () => {
                             borderRadius: '25px',
                             marginLeft: user.uid === message.uid ? 'auto' : '10px',
                         }}>
-                            <Grid container>
-                                <Avatar src={user.photoURL} />
+                            <Grid container alignItems={'center'} style={{marginBottom: 5}}>
+                                <Avatar style={{marginRight: 10}} src={user.photoURL} />
                                 <div>{message.displayName}</div>
                             </Grid>
                             <div>{message.text}</div>
